@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button"
-import { FaUsers, FaDiscord, FaGithub } from "react-icons/fa"
+import { FaUsers, FaDiscord, FaGithub } from "react-icons/fa6"
 import { Link } from "wouter"
 import { BrowserOpenURL } from "../../wailsjs/runtime"
 
@@ -12,7 +12,7 @@ export default function WelcomePage() {
 
       <div className="mx-10 my-10 flex grow flex-col justify-center">
         <h1 className="text-3xl font-medium tracking-tight text-balance">
-          Until Them... <span className="italic">em português! </span>✨
+          Until Them... <span className="italic">em português!</span> ✨
         </h1>
 
         <p className="mt-5 font-serif text-gray-300">
@@ -89,7 +89,7 @@ export default function WelcomePage() {
               GitHub
             </div>
             <span className="mt-1 text-[10px] font-light tracking-wider uppercase opacity-80">
-              Ver código-fonte
+              Veja o código-fonte
             </span>
           </Button>
         </div>
