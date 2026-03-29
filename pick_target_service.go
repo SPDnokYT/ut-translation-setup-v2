@@ -96,19 +96,22 @@ func findSteamPath() string {
 			filepath.Join(home, "snap", "steam", "common", ".local", "share", "Steam"),
 			filepath.Join(home, ".var", "app", "com.valvesoftware.Steam", "data", "Steam"),
 		}
-
 	case "windows":
 		if path := steamPathFromRegistry(); path != "" {
 			candidates = append(candidates, path)
 		}
-
 		candidates = append(candidates,
 			filepath.Join(os.Getenv("ProgramFiles(x86)"), "Steam"),
 			filepath.Join(os.Getenv("ProgramFiles"), "Steam"),
 		)
-
 	default:
 		return ""
+	}
+
+	for _, p := range candidates {
+		if info, err := os.Stat(p); err == nil && info.IsDir() {
+			return p
+		}
 	}
 
 	return ""
