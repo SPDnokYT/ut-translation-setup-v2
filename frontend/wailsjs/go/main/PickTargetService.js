@@ -13,3 +13,7 @@ export function OpenFilePicker() {
 export function QuickFind() {
   return window['go']['main']['PickTargetService']['QuickFind']();
 }
+
+export function SaveSettings(arg1, arg2, arg3) {
+  return window['go']['main']['PickTargetService']['SaveSettings'](arg1, arg2, arg3);
+}

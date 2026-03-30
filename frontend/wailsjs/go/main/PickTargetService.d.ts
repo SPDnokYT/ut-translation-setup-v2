@@ -7,3 +7,5 @@ export function CheckFreeSpace(arg1:string):Promise<boolean>;
 export function OpenFilePicker():Promise<main.FileValidationResult>;
 
 export function QuickFind():Promise<main.FileValidationResult>;
+
+export function SaveSettings(arg1:string,arg2:boolean,arg3:boolean):Promise<void>;
