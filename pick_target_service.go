@@ -9,6 +9,8 @@ import (
 	"strings"
 
 	"github.com/andygrunwald/vdf"
+	"github.com/shirou/gopsutil/disk"
+
 	wails "github.com/wailsapp/wails/v2/pkg/runtime"
 )
 
@@ -62,6 +64,23 @@ func (s *PickTargetService) OpenFilePicker() FileValidationResult {
 	}
 
 	return s.validateFile(path)
+}
+
+func (s *PickTargetService) CheckFreeSpace(path string) bool {
+	if path == "" {
+		return false
+	}
+
+	dir := filepath.Dir(path)
+
+	usage, err := disk.Usage(dir)
+	if err != nil {
+		return false
+	}
+
+	const requiredBytes uint64 = 5368709120
+
+	return usage.Free >= requiredBytes
 }
 
 func (s *PickTargetService) validateFile(path string) FileValidationResult {

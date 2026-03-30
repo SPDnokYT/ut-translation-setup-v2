@@ -4,6 +4,8 @@ go 1.24.0
 
 require github.com/wailsapp/wails/v2 v2.12.0
 
+require github.com/yusufpapurcu/wmi v1.2.4 // indirect
+
 require (
 	git.sr.ht/~jackmordaunt/go-toast/v2 v2.0.3 // indirect
 	github.com/andygrunwald/vdf v1.1.0
@@ -25,6 +27,7 @@ require (
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/rivo/uniseg v0.4.7 // indirect
 	github.com/samber/lo v1.49.1 // indirect
+	github.com/shirou/gopsutil v3.21.11+incompatible
 	github.com/tkrajina/go-reflector v0.5.8 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
 	github.com/valyala/fasttemplate v1.2.2 // indirect
