@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button"
 import { FaDiscord, FaGithub } from "react-icons/fa6"
-import { BrowserOpenURL } from "../../wailsjs/runtime"
+import { BrowserOpenURL, Quit } from "../../wailsjs/runtime"
 import confetti from "canvas-confetti"
 import { useEffect } from "react"
 
@@ -60,6 +60,7 @@ export default function FinishedPage() {
       <Button
         className="mt-10 h-20 w-full text-2xl hover:cursor-pointer"
         size="lg"
+        onClick={Quit}
       >
         Até Lá!
       </Button>
