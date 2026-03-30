@@ -6,32 +6,39 @@ import { useEffect } from "react"
 
 export default function FinishedPage() {
   useEffect(() => {
-    // 1. Define the "Rain Drop" function
-    const fireConfetti = () => {
+    function randomInRange(min: number, max: number): number {
+      return Math.random() * (max - min) + min
+    }
+
+    const colors = [
+      "#26ccff",
+      "#a25afd",
+      "#ff5e7e",
+      "#88ff5a",
+      "#fcff42",
+      "#ffa62d",
+      "#ff36ff",
+    ]
+
+    const interval = setInterval(() => {
       confetti({
-        particleCount: 5,
-        angle: 90,
-        spread: 45,
-        origin: { x: Math.random(), y: 1.05 }, // Higher start = faster appearance
-        startVelocity: 60,
-        gravity: 0.4,
-        ticks: 1000,
-        colors: ["#fe218b", "#fed700", "#21b0fe"],
-        scalar: 0.8,
+        particleCount: 1,
+        startVelocity: 0,
+        ticks: 1500,
+        gravity: randomInRange(0.3, 0.6),
+        drift: randomInRange(-0.5, 0.5),
+        origin: {
+          x: randomInRange(0, 1),
+          y: -0.1,
+        },
+        colors: [colors[Math.floor(Math.random() * colors.length)]],
+        scalar: randomInRange(0.5, 1.2),
       })
-    }
+    }, 50)
 
-    // 2. Fire several immediately to fill the top of the screen instantly
-    for (let i = 0; i < 5; i++) {
-      fireConfetti()
-    }
-
-    // 3. Start the continuous loop
-    const interval = window.setInterval(fireConfetti, 100)
-
-    const timeout = window.setTimeout(() => {
+    const timeout = setTimeout(() => {
       clearInterval(interval)
-    }, 3000)
+    }, 15000)
 
     return () => {
       clearTimeout(timeout)
