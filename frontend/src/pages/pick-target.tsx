@@ -20,6 +20,7 @@ import {
   QuickFind,
   OpenFilePicker,
   CheckFreeSpace,
+  SaveSettings,
 } from "../../wailsjs/go/main/PickTargetService"
 import { toast } from "sonner"
 import {
@@ -31,21 +32,29 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog"
 import { Toaster } from "@/components/ui/sonner"
+import { useLocation } from "wouter"
 
 export default function PickTargetPage() {
+  const [, navigate] = useLocation()
   const [targetPath, setTargetPath] = useState<string>("")
+  const [isDemo, setIsDemo] = useState<boolean>(false)
+  const [isBackupChecked, setIsBackupChecked] = useState<boolean>(false)
   const [isSpaceDialogOpen, setIsSpaceDialogOpen] = useState<boolean>(false)
   const [isValid, setIsValid] = useState<boolean>(false)
-  const [isBackupChecked, setIsBackupChecked] = useState<boolean>(false)
   const [isCheckingSpace, setIsCheckingSpace] = useState<boolean>(false)
+
+  async function handleInstallButton() {
+    SaveSettings(targetPath, isDemo, isBackupChecked)
+    navigate("/install")
+  }
 
   async function handleSuccessfulValidation(
     path: string,
     autoFound: boolean,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    _isDemo: boolean
+    isDemo: boolean
   ) {
     setTargetPath(path)
+    setIsDemo(isDemo)
 
     const hasSpace = await CheckFreeSpace(path)
 
@@ -176,6 +185,7 @@ export default function PickTargetPage() {
 
         <Button
           disabled={!isValid}
+          onClick={handleInstallButton}
           size="lg"
           className="mt-5 w-full hover:cursor-pointer"
         >
