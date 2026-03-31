@@ -13,13 +13,13 @@ export default function FinishedPage() {
     const interval = setInterval(() => {
       confetti({
         angle: randomInRange(80, 100),
-        colors: ["#ffbe0b", "#fb5607", "#ff006e", "#8338ec", "#3a86ff"],
+        colors: ["#FE218B", "#FED700", "#21B0FE", "#6EEB83", "#FF5714"],
         disableForReducedMotion: true,
         drift: randomInRange(-1, 1),
         gravity: randomInRange(0.4, 0.8),
         origin: { x: Math.random(), y: 1.05 },
         particleCount: randomInRange(3, 25),
-        scalar: randomInRange(0.4, 1.2),
+        scalar: randomInRange(0.4, 1),
         startVelocity: randomInRange(50, 100),
         ticks: 3000,
       })
