@@ -18,7 +18,7 @@ func NewFileLogger(baseName string) (*FileLogger, error) {
 		return nil, fmt.Errorf("error obtaining executable path: %v", err)
 	}
 
-	timestamp := time.Now().Format(time.RFC3339)
+	timestamp := time.Now().Format("2006-01-02_15-04-05")
 	exeDir := filepath.Dir(execPath)
 	filename := fmt.Sprintf("%s_%s.log", baseName, timestamp)
 	logPath := filepath.Join(exeDir, filename)
@@ -39,7 +39,7 @@ func (l *FileLogger) GetLogPath() string {
 }
 
 func (l *FileLogger) write(level, message string) {
-	timestamp := time.Now().Format(time.RFC3339)
+	timestamp := time.Now().Format("2006-01-02_15-04-05")
 	logLine := fmt.Sprintf("[%s] %s: %s\n", timestamp, level, message)
 
 	l.file.WriteString(logLine)
