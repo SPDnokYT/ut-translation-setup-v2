@@ -12,6 +12,7 @@ import (
 	"os/exec"
 	"path/filepath"
 	"runtime"
+	"syscall"
 
 	wails "github.com/wailsapp/wails/v2/pkg/runtime"
 )
@@ -77,6 +78,14 @@ func (s *PckExplorerService) startInstallProcess() {
 	wails.EventsEmit(s.ctx, "install_step", "Aplicando tradução (isso pode levar alguns instantes)...")
 
 	cmd := exec.CommandContext(s.ctx, binPath, "-pc", targetPckPath, translationFilesPath, modifiedPckPath, "2.2.4.1")
+
+	// This prevents the console window from appearing on Windows
+	if runtime.GOOS == "windows" {
+		cmd.SysProcAttr = &syscall.SysProcAttr{
+			HideWindow:    true,
+			CreationFlags: syscall.CREATE_NEW_PROCESS_GROUP | 0x08000000,
+		}
+	}
 
 	stdout, _ := cmd.StdoutPipe()
 	stderr, _ := cmd.StderrPipe()
@@ -166,6 +175,12 @@ func (s *PckExplorerService) failAndLog(modifiedPck string, err error) {
 	if modifiedPck != "" {
 		os.Remove(modifiedPck)
 	}
+
+	wails.MessageDialog(s.ctx, wails.MessageDialogOptions{
+		Type:    wails.ErrorDialog,
+		Title:   "Erro durante a Instalação",
+		Message: fmt.Sprintf("Um erro inesperado aconteceu durante a instalação\nUm arquvi de log foi criado em: %s", GetLogFilePath()),
+	})
 }
 
 func (s *PckExplorerService) streamLogs(pipe io.ReadCloser, eventName string) {
