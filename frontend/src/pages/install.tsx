@@ -13,7 +13,6 @@ export default function InstallPage() {
   const MAX_LOGS = 25
   const [, navigate] = useLocation()
   const [step, setStep] = useState("Preparando instalação...")
-  const [progress, setProgress] = useState(0)
   const [logs, setLogs] = useState<string[]>([])
   const [status, setStatus] = useState<"installing" | "success" | "error">(
     "installing"
@@ -38,9 +37,6 @@ export default function InstallPage() {
       setStep(currentStep)
     })
 
-    EventsOn("unzip_bin_progress", (p: number) => setProgress(p))
-    EventsOn("unzip_trans_progress", (p: number) => setProgress(p))
-
     EventsOn("install_log", (msg: string) => {
       appendLog(msg)
     })
@@ -54,8 +50,8 @@ export default function InstallPage() {
     EventsOn("install_success", (msg: string) => {
       setStatus("success")
       setStep(msg)
-      setProgress(100)
       appendLog("[SISTEMA] Processo finalizado com sucesso!")
+      navigate("/finished")
     })
 
     return () => {
@@ -91,14 +87,11 @@ export default function InstallPage() {
             {step}
           </ItemTitle>
         </ItemContent>
-        <ItemContent className="flex-none justify-end font-mono text-sm">
-          {progress}%
-        </ItemContent>
       </Item>
 
       <ScrollArea
         ref={scrollViewportRef}
-        className="h-1/3 w-full rounded border bg-black/5 p-3 font-mono text-xs text-muted-foreground dark:bg-black/40"
+        className="h-1/3 w-full rounded border p-3 font-mono text-xs text-muted-foreground"
       >
         <div className="flex flex-col gap-1">
           {logs.length === 0 ? (
@@ -118,7 +111,7 @@ export default function InstallPage() {
 
       {status !== "installing" && (
         <button
-          className="mt-4 rounded bg-primary px-6 py-2 text-primary-foreground transition-opacity hover:opacity-90"
+          className="mt-4 rounded bg-primary px-6 py-2 text-primary-foreground transition-opacity hover:cursor-pointer"
           onClick={() => {
             if (status === "success") {
               navigate("/finished")
