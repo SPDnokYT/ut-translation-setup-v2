@@ -13,6 +13,7 @@ import (
 	"path/filepath"
 	"runtime"
 	"syscall"
+	"time"
 
 	wails "github.com/wailsapp/wails/v2/pkg/runtime"
 )
@@ -184,8 +185,32 @@ func (s *PckExplorerService) failAndLog(modifiedPck string, err error) {
 }
 
 func (s *PckExplorerService) streamLogs(pipe io.ReadCloser, eventName string) {
+	defer pipe.Close()
 	scanner := bufio.NewScanner(pipe)
-	for scanner.Scan() {
-		wails.EventsEmit(s.ctx, eventName, scanner.Text())
+
+	var lastLine string
+	hasNewContent := false
+
+	ticker := time.NewTicker(100 * time.Millisecond)
+	defer ticker.Stop()
+
+	go func() {
+		for scanner.Scan() {
+			lastLine = scanner.Text()
+			hasNewContent = true
+		}
+	}()
+
+	for {
+		select {
+		case <-ticker.C:
+			// Só envia se houver algo novo para não repetir a mesma linha
+			if hasNewContent {
+				wails.EventsEmit(s.ctx, eventName, lastLine)
+				hasNewContent = false
+			}
+		case <-s.ctx.Done():
+			return
+		}
 	}
 }
