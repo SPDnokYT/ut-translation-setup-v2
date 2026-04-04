@@ -1,58 +1,59 @@
 package main
 
 import (
-	"fmt"
+	"log"
 	"os"
-	"path/filepath"
-	"time"
 )
 
 type FileLogger struct {
-	filePath string
-	file     *os.File
+	file   *os.File
+	logger *log.Logger
 }
 
-func NewFileLogger(baseName string) (*FileLogger, error) {
-	execPath, err := os.Executable()
+func NewFileLogger(filename string) *FileLogger {
+	file, err := os.OpenFile(filename, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0666)
 	if err != nil {
-		return nil, fmt.Errorf("error obtaining executable path: %v", err)
-	}
-
-	timestamp := time.Now().Format("2006-01-02_15-04-05")
-	exeDir := filepath.Dir(execPath)
-	filename := fmt.Sprintf("%s_%s.log", baseName, timestamp)
-	logPath := filepath.Join(exeDir, filename)
-
-	file, err := os.OpenFile(logPath, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
-	if err != nil {
-		return nil, fmt.Errorf("error opening the log file: %v", err)
+		log.Fatalf("Failed to open log file: %v", err)
 	}
 
 	return &FileLogger{
-		filePath: logPath,
-		file:     file,
-	}, nil
+		file:   file,
+		logger: log.New(file, "", log.Ldate|log.Ltime),
+	}
 }
 
-func (l *FileLogger) GetLogPath() string {
-	return l.filePath
+func (l *FileLogger) Close() {
+	if l.file != nil {
+		l.file.Close()
+	}
 }
 
-func (l *FileLogger) write(level, message string) {
-	timestamp := time.Now().Format("2006-01-02_15-04-05")
-	logLine := fmt.Sprintf("[%s] %s: %s\n", timestamp, level, message)
+// -- Wails logger.Logger Interface Implementation --
 
-	l.file.WriteString(logLine)
-	fmt.Print(logLine)
+func (l *FileLogger) Print(message string) {
+	l.logger.Println(message)
 }
 
-func (l *FileLogger) Print(message string)   { l.write("PRINT", message) }
-func (l *FileLogger) Trace(message string)   { l.write("TRACE", message) }
-func (l *FileLogger) Debug(message string)   { l.write("DEBUG", message) }
-func (l *FileLogger) Info(message string)    { l.write("INFO", message) }
-func (l *FileLogger) Warning(message string) { l.write("WARN", message) }
-func (l *FileLogger) Error(message string)   { l.write("ERROR", message) }
+func (l *FileLogger) Trace(message string) {
+	l.logger.Println("TRC | " + message)
+}
+
+func (l *FileLogger) Debug(message string) {
+	l.logger.Println("DBG | " + message)
+}
+
+func (l *FileLogger) Info(message string) {
+	l.logger.Println("INF | " + message)
+}
+
+func (l *FileLogger) Warning(message string) {
+	l.logger.Println("WRN | " + message)
+}
+
+func (l *FileLogger) Error(message string) {
+	l.logger.Println("ERR | " + message)
+}
+
 func (l *FileLogger) Fatal(message string) {
-	l.write("FATAL", message)
-	os.Exit(1)
+	l.logger.Fatalln("FTL | " + message)
 }
