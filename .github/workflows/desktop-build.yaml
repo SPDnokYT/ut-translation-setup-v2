@@ -62,11 +62,18 @@ jobs:
           go-version: "1.23"
           node-version: "22.x"
 
+      - name: Compress binary with UPX
+        uses: crazy-max/ghaction-upx@v3
+        with:
+          version: latest
+          files: build/bin/${{ env.FINAL_BINARY_NAME }}
+          args: -9 # Uses maximum compression. Change to -7 or -8 if it takes too long.
+
       - name: Upload to Release
         uses: softprops/action-gh-release@v2
         if: startsWith(github.ref, 'refs/tags/')
         with:
-          # The wails action usually outputs the built binary to build/bin/
+          # The wails action outputs the built binary to build/bin/
           files: build/bin/${{ env.FINAL_BINARY_NAME }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
