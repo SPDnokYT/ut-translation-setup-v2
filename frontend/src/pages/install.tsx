@@ -71,11 +71,8 @@ export default function InstallPage() {
   }, [logs])
 
   return (
-    <div className="mx-20 flex h-screen flex-col items-center justify-center gap-5">
-      <Item
-        className="w-1/2 rounded transition-all duration-300"
-        variant="muted"
-      >
+    <div className="mx-10 flex h-screen flex-col items-center justify-center gap-5">
+      <Item className="rounded transition-all duration-300" variant="muted">
         <ItemMedia>
           {status === "installing" && <Spinner />}
           {status === "success" && <FaCircleCheck className="text-green-500" />}

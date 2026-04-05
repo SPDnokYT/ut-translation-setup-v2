@@ -30,7 +30,7 @@ export default function ThemeToggle({ className }: ThemeToggleProps) {
           variant="outline"
           onClick={onClick}
           className={cn("hover:cursor-pointer", className)}
-          size="icon"
+          size="icon-xs"
         >
           {theme == "light" ? <FaSun /> : <FaMoon />}
         </Button>

@@ -1,8 +1,8 @@
 import { Button } from "@/components/ui/button"
-import { FaDiscord, FaGithub } from "react-icons/fa6"
-import { BrowserOpenURL, Quit } from "../../wailsjs/runtime"
+import { Quit } from "../../wailsjs/runtime"
 import confetti from "canvas-confetti"
 import { useEffect } from "react"
+import SocialButtons from "@/components/social-buttons"
 
 export default function FinishedPage() {
   useEffect(() => {
@@ -36,18 +36,18 @@ export default function FinishedPage() {
   }, [])
 
   return (
-    <div className="mx-28 flex h-dvh flex-col items-center justify-center select-none">
+    <div className="mx-15 flex h-dvh flex-col items-center justify-center select-none">
       <video
+        className="pointer-events-none h-35 rounded"
         draggable={false}
         autoPlay
         loop
-        className="pointer-events-none aspect-square w-2/12 rounded"
         src="cathy.webm"
       />
 
-      <h1 className="mt-5 text-3xl font-bold">Instalação Completa! 🎉</h1>
+      <h1 className="mt-2 text-center text-2xl">Instalação Completa! 🎉</h1>
 
-      <p className="mx-20 mt-2 text-center text-muted-foreground">
+      <p className="text-sm text-muted-foreground sm:mt-5">
         De coração, muito obrigado pela confiança! Foi um esforço de paixão de
         toda a equipe. Caso encontre algum erro ou tenha alguma sugestão, por
         favor, não hesite em nos contar!
@@ -55,42 +55,10 @@ export default function FinishedPage() {
         No mais, aproveite a viagem. Bom jogo!
       </p>
 
-      <Button
-        className="mt-10 h-20 w-full text-2xl hover:cursor-pointer"
-        size="lg"
-        onClick={Quit}
-      >
+      <Button className="mt-2 w-full sm:mt-5" size="lg" onClick={Quit}>
         Até Lá!
       </Button>
-      <div className="mt-2 flex w-full justify-center gap-2">
-        <Button
-          variant="outline"
-          onClick={() => BrowserOpenURL("https://discord.gg/MKn6QBVG9g")}
-          className="flex h-auto flex-1 flex-col items-center px-6 py-4 hover:cursor-pointer"
-        >
-          <div className="flex items-center gap-2 text-lg">
-            <FaDiscord />
-            Discord
-          </div>
-          <span className="text-[10px] uppercase opacity-80">
-            Entre na comunidade
-          </span>
-        </Button>
-
-        <Button
-          variant="outline"
-          onClick={() =>
-            BrowserOpenURL("https://github.com/flyri0/ut-translation-setup-v2")
-          }
-          className="flex h-auto flex-1 flex-col items-center px-6 py-4 hover:cursor-pointer"
-        >
-          <div className="flex items-center gap-2 text-lg">
-            <FaGithub />
-            GitHub
-          </div>
-          <span className="text-[10px] uppercase opacity-80">Código-fonte</span>
-        </Button>
-      </div>
+      <SocialButtons className="mt-2" />
     </div>
   )
 }
