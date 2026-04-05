@@ -12,7 +12,6 @@ import (
 	"os/exec"
 	"path/filepath"
 	"runtime"
-	"syscall"
 	"time"
 
 	wails "github.com/wailsapp/wails/v2/pkg/runtime"
@@ -81,12 +80,7 @@ func (s *PckExplorerService) startInstallProcess() {
 	cmd := exec.CommandContext(s.ctx, binPath, "-pc", targetPckPath, translationFilesPath, modifiedPckPath, "2.2.4.1")
 
 	// This prevents the console window from appearing on Windows
-	if runtime.GOOS == "windows" {
-		cmd.SysProcAttr = &syscall.SysProcAttr{
-			HideWindow:    true,
-			CreationFlags: syscall.CREATE_NEW_PROCESS_GROUP | 0x08000000,
-		}
-	}
+	cmd.SysProcAttr = getSysProcAttr()
 
 	stdout, _ := cmd.StdoutPipe()
 	stderr, _ := cmd.StderrPipe()

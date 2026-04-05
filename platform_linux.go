@@ -4,6 +4,7 @@ package main
 
 import (
 	_ "embed"
+	"syscall"
 )
 
 //go:embed assets/GodotPCKExplorer_1.5.3_native-console-linux-64.zip
@@ -15,3 +16,7 @@ const (
 )
 
 func steamPathFromRegistry() string { return "" }
+
+func getSysProcAttr() *syscall.SysProcAttr {
+	return &syscall.SysProcAttr{}
+}

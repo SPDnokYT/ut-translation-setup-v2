@@ -4,6 +4,7 @@ package main
 
 import (
 	_ "embed"
+	"syscall"
 
 	"golang.org/x/sys/windows/registry"
 )
@@ -33,4 +34,11 @@ func steamPathFromRegistry() string {
 	}
 
 	return value
+}
+
+func getSysProcAttr() *syscall.SysProcAttr {
+	return &syscall.SysProcAttr{
+		HideWindow:    true,
+		CreationFlags: syscall.CREATE_NEW_PROCESS_GROUP,
+	}
 }
