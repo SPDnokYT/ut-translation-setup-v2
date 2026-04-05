@@ -11,7 +11,7 @@ type FileLogger struct {
 }
 
 func NewFileLogger(filename string) *FileLogger {
-	file, err := os.OpenFile(filename, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0666)
+	file, err := os.OpenFile(filename, os.O_APPEND|os.O_CREATE|os.O_WRONLY|os.O_TRUNC, 0666)
 	if err != nil {
 		log.Fatalf("Failed to open log file: %v", err)
 	}
