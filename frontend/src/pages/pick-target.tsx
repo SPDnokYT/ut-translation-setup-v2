@@ -201,7 +201,7 @@ export default function PickTargetPage() {
             <AlertDialogHeader>
               <AlertDialogTitle>Espaço em disco insuficiente</AlertDialogTitle>
               <AlertDialogDescription>
-                O local selecionado não tem os <strong>4GB</strong> de espaço
+                O local selecionado não tem os <strong>5GB</strong> de espaço
                 livre necessários. Libere espaço no disco e tente novamente.
               </AlertDialogDescription>
             </AlertDialogHeader>

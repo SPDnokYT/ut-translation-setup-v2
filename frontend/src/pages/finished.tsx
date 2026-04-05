@@ -20,7 +20,7 @@ export default function FinishedPage() {
         origin: { x: Math.random(), y: 1.05 },
         particleCount: randomInRange(3, 25),
         scalar: randomInRange(0.4, 1),
-        startVelocity: randomInRange(50, 100),
+        startVelocity: randomInRange(20, 80),
         ticks: 3000,
       })
     }, 50)
@@ -45,9 +45,11 @@ export default function FinishedPage() {
         src="cathy.webm"
       />
 
-      <h1 className="mt-2 text-center text-2xl">Instalação Completa! 🎉</h1>
+      <h1 className="mt-2 text-center text-2xl font-bold md:text-3xl">
+        Instalação Completa! 🎉
+      </h1>
 
-      <p className="text-sm text-muted-foreground sm:mt-5">
+      <p className="max-w-9/12 text-sm text-muted-foreground sm:mt-5 sm:text-lg">
         De coração, muito obrigado pela confiança! Foi um esforço de paixão de
         toda a equipe. Caso encontre algum erro ou tenha alguma sugestão, por
         favor, não hesite em nos contar!
@@ -55,7 +57,11 @@ export default function FinishedPage() {
         No mais, aproveite a viagem. Bom jogo!
       </p>
 
-      <Button className="mt-2 w-full sm:mt-5" size="lg" onClick={Quit}>
+      <Button
+        className="mt-2 w-full hover:cursor-pointer sm:mt-5"
+        size="lg"
+        onClick={Quit}
+      >
         Até Lá!
       </Button>
       <SocialButtons className="mt-2" />
