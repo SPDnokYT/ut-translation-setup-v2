@@ -12,6 +12,7 @@ import (
 	"os/exec"
 	"path/filepath"
 	"runtime"
+	"strings"
 	"time"
 
 	wails "github.com/wailsapp/wails/v2/pkg/runtime"
@@ -156,15 +157,21 @@ func (s *PckExplorerService) unzipFromMemory(data []byte, dest, eventName string
 		progress := int(float64(i+1) / float64(total) * 100)
 		wails.EventsEmit(s.ctx, eventName, progress)
 
-		fpath := filepath.Join(dest, f.Name)
+		normalizedName := strings.ReplaceAll(f.Name, "\\", "/")
+		fpath := filepath.Join(dest, normalizedName)
 
-		if f.FileInfo().IsDir() {
-			os.MkdirAll(fpath, os.ModePerm)
+		isDir := f.FileInfo().IsDir() || strings.HasSuffix(normalizedName, "/")
+
+		if isDir {
+			if err := os.MkdirAll(fpath, os.ModePerm); err != nil {
+				wails.LogError(s.ctx, fmt.Sprintf("Erro ao criar estrutura de diretório para %s: %v", fpath, err))
+				return err
+			}
 			continue
 		}
 
 		if err := os.MkdirAll(filepath.Dir(fpath), os.ModePerm); err != nil {
-			wails.LogError(s.ctx, fmt.Sprintf("Erro ao criar estrutura de diretório para %s: %v", fpath, err))
+			wails.LogError(s.ctx, fmt.Sprintf("Erro ao criar diretório pai para o arquivo %s: %v", fpath, err))
 			return err
 		}
 
