@@ -12,7 +12,7 @@ import { RunInstallation } from "../../wailsjs/go/main/PckExplorerService"
 export default function InstallPage() {
   const MAX_LOGS = 25
   const [, navigate] = useLocation()
-  const [step, setStep] = useState("Preparando instalação...")
+  const [step, setStep] = useState("Подготовка к установке...")
   const [logs, setLogs] = useState<string[]>([])
   const [status, setStatus] = useState<"installing" | "success" | "error">(
     "installing"
@@ -29,8 +29,8 @@ export default function InstallPage() {
   useEffect(() => {
     RunInstallation().catch((err) => {
       setStatus("error")
-      setStep("Falha crítica ao iniciar.")
-      appendLog(`[SISTEMA] Erro ao invocar backend: ${err}`)
+      setStep("Критическая ошибка при запуске.")
+      appendLog(`[СИСТЕМА] Ошибка при обращении к бэкенду: ${err}`)
     })
 
     EventsOn("install_step", (currentStep: string) => {
@@ -43,14 +43,14 @@ export default function InstallPage() {
 
     EventsOn("install_error", (err: string) => {
       setStatus("error")
-      setStep("Erro durante a instalação.")
-      appendLog(`[ERRO] ${err}`)
+      setStep("Ошибка во время установки.")
+      appendLog(`[ОШИБКА] ${err}`)
     })
 
     EventsOn("install_success", (msg: string) => {
       setStatus("success")
       setStep(msg)
-      appendLog("[SISTEMA] Processo finalizado com sucesso!")
+      appendLog("[СИСТЕМА] Процесс успешно завершен!")
     })
 
     return () => {
@@ -91,12 +91,12 @@ export default function InstallPage() {
       >
         <div className="flex flex-col gap-1">
           {logs.length === 0 ? (
-            <span className="italic opacity-50">Aguardando logs...</span>
+            <span className="italic opacity-50">Ожидание логов...</span>
           ) : (
             logs.map((log, index) => (
               <div
                 key={index}
-                className={log.startsWith("[ERRO]") ? "text-red-500" : ""}
+                className={log.startsWith("[ОШИБКА]") ? "text-red-500" : ""}
               >
                 {log}
               </div>
@@ -117,7 +117,7 @@ export default function InstallPage() {
             Quit()
           }}
         >
-          {status === "success" ? "Concluir" : "Fechar Instalador"}
+          {status === "success" ? "Завершить" : "Закрыть установщик"}
         </button>
       )}
     </div>

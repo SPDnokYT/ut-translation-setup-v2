@@ -32,7 +32,7 @@ func main() {
 	pckExplorerService := NewPckExplorerService(sharedState)
 
 	err := wails.Run(&options.App{
-		Title:       "Until Then - Instalar Tradução",
+		Title:       "Until Then - Translation Setup",
 		Logger:      logger,
 		Width:       1024,
 		Height:      768,

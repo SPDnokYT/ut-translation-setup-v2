@@ -1,18 +1,12 @@
 import { Button } from "@/components/ui/button"
-import { FaUsers } from "react-icons/fa6"
+import { FaUsers, FaCode } from "react-icons/fa6"
 import { Link } from "wouter"
 import ThemeToggle from "@/components/theme-toggle"
 import SocialButtons from "@/components/social-buttons"
 
 export default function WelcomePage() {
-  const TEAM_MEMBERS = [
-    { alias: "PitterG4", name: "Bernardo Hoffmann" },
-    { alias: "Percival", name: "Gabriel Araújo" },
-	{ alias: "Ceci", name: "Cecília Dourado" },
-    { alias: "Lucasxt", name: "Lucas Silva" },
-    { alias: "Yubi", name: "Eduarda Albuquerque" },
-    { alias: "flyri0", name: "Francisco Lyrio" },
-  ]
+  const GROUP_NAME = "GameVerbal"
+  const INSTALLER_DEV = { alias: "flyri0", name: "Francisco Lyrio" }
 
   return (
     <div className="flex">
@@ -22,33 +16,37 @@ export default function WelcomePage() {
         <ThemeToggle className="mb-5" />
 
         <h1 className="mb-1 text-base font-medium tracking-tight text-balance md:text-2xl">
-          Until Then... <span className="italic">em português!</span> ✨
+          Until Then... <span className="italic">на русском!</span> ✨
         </h1>
 
         <p className="font-serif text-xs text-muted-foreground md:text-base">
-          Esta tradução foi feita com carinho por fãs, para que mais pessoas
-          possam desfrutar de <span className="italic">Until Then</span> em
-          nosso belíssimo português.<br />Esperamos que te emocione tanto
-          quanto nos emocionou.
+          Рады видеть тебя здесь!<br />Данный перевод создавался с душой, чтобы как можно больше людей смогли погрузиться в атмосферу <span className="italic">Until Then</span> обходя языковой барьер.
         </p>
-
-        <p className="mt-5 flex items-center gap-1 text-sm text-muted-foreground md:text-base">
-          <span>
-            <FaUsers />
-          </span>
-          Equipe do Projeto:
-        </p>
-        <ul className="list-inside list-disc font-serif text-xs md:text-sm">
-          {TEAM_MEMBERS.map(({ alias, name }) => (
-            <li key={alias}>
-              <span className="text-muted-foreground">({alias})</span> {name}
-            </li>
-          ))}
-        </ul>
+		
+		<div className="mt-5">
+			<p className="flex items-center gap-1 text-sm text-muted-foreground md:text-base">
+			  <span>
+				<FaUsers />
+			  </span>
+			  Перевод от:
+			</p>
+			<p className="font-serif text-base md:text-lg font-medium">
+			  {GROUP_NAME}
+			</p>
+		</div>
+		
+		<div className="mt-3">
+          <p className="flex items-center gap-1 text-sm text-muted-foreground md:text-base">
+            <FaCode /> Установщик от:
+          </p>
+          <p className="font-serif text-xs md:text-sm">
+             <span className="text-muted-foreground">({INSTALLER_DEV.alias})</span> {INSTALLER_DEV.name}
+          </p>
+        </div>
 
         <Link to="/pick-target" asChild>
           <Button className="mt-5 w-full hover:cursor-pointer md:h-16 md:text-2xl">
-            Vamos lá!
+            Поехали!
           </Button>
         </Link>
 

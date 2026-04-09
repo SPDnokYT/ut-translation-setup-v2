@@ -40,15 +40,13 @@ export default function FinishedPage() {
       <img draggable={false} className="w-1/5 rounded" src="cathy.gif" />
 
       <h1 className="mt-5 text-center text-2xl font-bold md:text-3xl">
-        Instalação Completa! 🎉
+        Установка завершена! 🎉
       </h1>
 
       <p className="max-w-9/12 text-center font-serif text-sm text-muted-foreground sm:mt-5 sm:text-lg">
-        De coração, muito obrigado pela confiança! Foi um esforço de paixão de
-        toda a equipe. Caso encontre algum erro ou tenha alguma sugestão, por
-        favor, não hesite em nos contar!
+        Благодарим за доверие! Мы очень старались, чтобы порадовать вас качественным переводом. При обнаружении каких-либо ошибок, пожалуйста, сообщите нам!
         <br /> <br />
-        No mais, aproveite a viagem. Bom jogo! 🫡
+        А в остальном — наслаждайтесь прохождением. Приятной игры!
       </p>
 
       <Button
@@ -56,7 +54,7 @@ export default function FinishedPage() {
         size="lg"
         onClick={Quit}
       >
-        Até Lá!
+        Встретимся там!
       </Button>
       <SocialButtons className="mt-2" />
     </div>

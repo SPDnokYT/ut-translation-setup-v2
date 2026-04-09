@@ -64,8 +64,8 @@ export default function PickTargetPage() {
     } else {
       setIsValid(true)
       if (autoFound) {
-        toast.success("Instalação encontrada automaticamente", {
-          description: "Detectamos uma instalação do Until Then na Steam.",
+        toast.success("Установка найдена автоматически", {
+          description: "Обнаружена установка Until Then в Steam.",
           position: "top-center",
         })
       }
@@ -78,7 +78,7 @@ export default function PickTargetPage() {
       if (result.valid) {
         handleSuccessfulValidation(result.path, false, result.isDemo)
       } else if (result.error !== "not_selected") {
-        toast.error("Arquivo inválido", {
+        toast.error("Неверный файл", {
           position: "top-center",
         })
       }
@@ -96,7 +96,7 @@ export default function PickTargetPage() {
       setIsSpaceDialogOpen(false)
       setIsValid(true)
     } else {
-      toast.error("Ainda não há espaço suficiente disponivel.", {
+      toast.error("По-прежнему недостаточно свободного места.", {
         position: "top-center",
       })
     }
@@ -129,9 +129,9 @@ export default function PickTargetPage() {
       <div className="mx-17 flex h-dvh flex-col justify-center select-none">
         <FieldGroup>
           <Field>
-            <FieldLabel>Instalação do jogo</FieldLabel>
+            <FieldLabel>Установка игры</FieldLabel>
             <FieldDescription>
-              Selecione o arquivo UntilThen.pck na pasta do jogo
+              Выберите файл UntilThen.pck в папке с игрой
             </FieldDescription>
             <ButtonGroup>
               <InputGroup>
@@ -144,7 +144,7 @@ export default function PickTargetPage() {
                 <InputGroupInput
                   disabled
                   value={targetPath}
-                  placeholder="Nenhum arquivo selecionado"
+                  placeholder="Файл не выбран"
                   className="truncate"
                 />
               </InputGroup>
@@ -155,14 +155,14 @@ export default function PickTargetPage() {
                 onClick={handleManualSelect}
               >
                 <FaFolderOpen />
-                Procurar...
+                Обзор...
               </Button>
             </ButtonGroup>
 
             <FieldDescription className="h-5">
               {isValid && (
                 <span className="font-medium text-emerald-500">
-                  Arquivo UntilThen.pck validado com sucesso.
+                  Файл UntilThen.pck успешно проверен.
                 </span>
               )}
             </FieldDescription>
@@ -174,10 +174,9 @@ export default function PickTargetPage() {
               onCheckedChange={(value: boolean) => setIsBackupChecked(value)}
             />
             <FieldContent>
-              <FieldTitle>Criar cópia de segurança</FieldTitle>
+              <FieldTitle>Создать резервную копию</FieldTitle>
               <FieldDescription className="w-3/5">
-                Salva uma cópia do arquivo original para restaurar
-				o idioma padrão (ocupa 2 GB adicionais).
+                Сохраняет копию оригинального файла для восстановления стандартного языка (потребуется 2 ГБ дополнительного места).
               </FieldDescription>
             </FieldContent>
           </Field>
@@ -190,7 +189,7 @@ export default function PickTargetPage() {
           className="mt-5 w-full hover:cursor-pointer"
         >
           <FaFileArrowDown />
-          Iniciar Instalação
+          Начать установку
         </Button>
 
         <AlertDialog
@@ -199,21 +198,20 @@ export default function PickTargetPage() {
         >
           <AlertDialogContent>
             <AlertDialogHeader>
-              <AlertDialogTitle>Espaço em disco insuficiente</AlertDialogTitle>
+              <AlertDialogTitle>Недостаточно места на диске</AlertDialogTitle>
               <AlertDialogDescription>
-                O local selecionado não tem os <strong>5GB</strong> de espaço
-                livre necessários. Libere espaço no disco e tente novamente.
+                На выбранном диске нет необходимых <strong>5 ГБ</strong> свободного места. Освободите место и повторите попытку.
               </AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter>
               <Button variant="outline" onClick={handleCancelSpaceCheck}>
-                Cancelar
+                Отмена
               </Button>
               <Button
                 disabled={isCheckingSpace}
                 onClick={handleRetrySpaceCheck}
               >
-                {isCheckingSpace ? "Verificando..." : "Tentar Novamente"}
+                {isCheckingSpace ? "Проверка..." : "Повторить попытку"}
               </Button>
             </AlertDialogFooter>
           </AlertDialogContent>

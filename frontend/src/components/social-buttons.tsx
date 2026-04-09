@@ -1,5 +1,6 @@
 import { BrowserOpenURL } from "../../wailsjs/runtime"
-import { FaDiscord, FaGithub } from "react-icons/fa6"
+import { TbWorld } from "react-icons/tb"
+import { RiTelegram2Fill } from "react-icons/ri"
 import { Button } from "./ui/button"
 import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip"
 import { cn } from "@/lib/utils"
@@ -16,13 +17,13 @@ export default function SocialButtons({ className }: SocialButtonsProps) {
           <Button
             className="flex-1 hover:cursor-pointer"
             variant="outline"
-            onClick={() => BrowserOpenURL("https://discord.gg/MKn6QBVG9g")}
+            onClick={() => BrowserOpenURL("https://t.me/GameVerbal")}
           >
-            <FaDiscord />
-            Discord
+            <RiTelegram2Fill />
+            Telegram
           </Button>
         </TooltipTrigger>
-        <TooltipContent side="bottom">Entrar na comunidade</TooltipContent>
+        <TooltipContent side="bottom">Присоединиться к сообществу</TooltipContent>
       </Tooltip>
 
       <Tooltip disableHoverableContent>
@@ -32,15 +33,15 @@ export default function SocialButtons({ className }: SocialButtonsProps) {
             variant="outline"
             onClick={() =>
               BrowserOpenURL(
-                "https://github.com/flyri0/ut-translation-setup-v2"
+                "http://gameverbal.ru/"
               )
             }
           >
-            <FaGithub />
-            Github
+            <TbWorld />
+            Website
           </Button>
         </TooltipTrigger>
-        <TooltipContent side="bottom">Ver código-fonte</TooltipContent>
+        <TooltipContent side="bottom">Перейти на сайт</TooltipContent>
       </Tooltip>
     </div>
   )
