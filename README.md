@@ -1,14 +1,14 @@
-# 🇧🇷 Tradução PT-BR: Until Then
+# 🇷🇺 Перевод на русский (RU): Until Then
 
-Esta tradução foi feita com carinho por fãs, para que mais pessoas possam desfrutar de Until Then em nosso belíssimo idioma.
+Этот перевод был с любовью сделан фанатами, чтобы больше людей могли насладиться игрой Until Then на нашем прекрасном языке.
 
-Esperamos que esta jornada emocione você tanto quanto nos emocionou.
+Надеемся, что это путешествие тронет вас так же сильно, как и нас.
 
 ---
 
-## 🐧 Suporte para Linux (Dependências)
+## 🐧 Поддержка Linux (Зависимости)
 
-O instalador utiliza uma interface baseada em **WebView**. Embora a maioria das distribuições modernas já possua as bibliotecas necessárias, caso o instalador não abra ou apresente erros de "shared libraries" (como o `libwebkit2gtk-4.1.so.0`), instale a dependência correspondente à sua distro:
+Установщик использует интерфейс на базе **WebView**. Хотя большинство современных дистрибутивов уже содержит необходимые библиотеки, в случае если установщик не открывается или выдает ошибки отсутствия общих библиотек ("shared libraries", например `libwebkit2gtk-4.1.so.0`), установите зависимость, соответствующую вашему дистрибутиву:
 
 ### **Ubuntu / Debian / Linux Mint**
 
@@ -34,15 +34,10 @@ sudo pacman -S webkit2gtk-4.1
 sudo zypper install libwebkit2gtk-4_1-0
 ```
 
-## 👥 Créditos
+## 👥 Авторы
 
-- Bernardo Hoffmann (PitterG4) - Tradução e Instalador
-- Gabriel Araújo (Percival) - Tradução
-- Lucas Silva (Lucasxt) - Tradução
-- Eduarda Albuquerque (Yubi) - Tradução
-- Cecília (Ceci) - Tradução
-- Francisco Lyrio (flyri0) - Instalador
+- GameVerbal
 
-## ⚖️ Aviso Legal
+## ⚖️ Отказ от ответственности
 
-Este é um projeto **não oficial** feito por fãs e não possui fins lucrativos. Todos os direitos sobre o jogo _Until Then_ pertencem aos seus respectivos desenvolvedores e editores. Por favor, apoie os criadores originais comprando o jogo oficial em sua plataforma de preferência.
+Это **неофициальный** некоммерческий проект, созданный фанатами. Все права на игру _Until Then_ принадлежат ее соответствующим разработчикам и издателям. Пожалуйста, поддержите оригинальных создателей, купив официальную игру на вашей предпочитаемой платформе.
