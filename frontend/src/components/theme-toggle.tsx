@@ -35,7 +35,7 @@ export default function ThemeToggle({ className }: ThemeToggleProps) {
           {theme == "light" ? <FaSun /> : <FaMoon />}
         </Button>
       </TooltipTrigger>
-      <TooltipContent>Mudar tema</TooltipContent>
+      <TooltipContent>Сменить тему</TooltipContent>
     </Tooltip>
   )
 }
