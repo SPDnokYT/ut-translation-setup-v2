@@ -12,7 +12,7 @@ on:
         default: "v1.2.3"
 
 env:
-  APP_NAME: "UntilThenPTBR"
+  APP_NAME: "UntilThen [GameVerbal]"
 
 jobs:
   build:
