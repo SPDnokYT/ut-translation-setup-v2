@@ -12,7 +12,7 @@ on:
         default: "v1.2.3"
 
 env:
-  APP_NAME: "UntilThen [GameVerbal]"
+  APP_NAME: "UntilThen_GV"
 
 jobs:
   build:
