@@ -12,7 +12,7 @@ on:
         default: "v1.2.3"
 
 env:
-  APP_NAME: "UntilThen_GV"
+  APP_NAME: "UntilThen_GV_PC"
 
 jobs:
   build:
